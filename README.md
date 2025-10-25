@@ -64,26 +64,212 @@ This exponential speedup demonstrates quantum supremacy for this problem class.
 
 - Python 3.8 or higher
 - pip package manager
+- Git (optional, for cloning)
 
-### Setup
+---
 
-1. **Clone or download this repository**
+### 🚀 Quick Setup (Automated) - RECOMMENDED
+
+**For the easiest setup, use the automated installation scripts:**
+
+#### Windows:
+```bash
+# Double-click setup.bat OR run in terminal:
+setup.bat
+```
+
+#### Linux/macOS:
+```bash
+# Make executable (first time only)
+chmod +x setup.sh
+
+# Run the setup script
+./setup.sh
+```
+
+**What the script does:**
+1. ✅ Checks Python installation
+2. ✅ Creates virtual environment automatically
+3. ✅ Activates the environment
+4. ✅ Upgrades pip
+5. ✅ Installs all dependencies from requirements.txt
+6. ✅ Verifies installation
+7. ✅ Optionally runs the test suite
+
+**After running the setup script, you're ready to go!**
+
+---
+
+### Manual Setup (Advanced Users)
+
+### Recommended: Using Virtual Environment
+
+**Virtual environments isolate project dependencies and prevent conflicts with system packages.**
+
+#### Step-by-Step Installation (Windows)
+
+1. **Navigate to the project directory**
 
 ```bash
 cd C:\Users\DEADSERPENT\Music\QISKIT
 ```
 
-2. **Install required packages**
+2. **Create a virtual environment**
 
 ```bash
-pip install qiskit qiskit-aer numpy
+python -m venv venv
 ```
+
+This creates a `venv` folder containing an isolated Python environment.
+
+3. **Activate the virtual environment**
+
+**Windows (Command Prompt):**
+```bash
+venv\Scripts\activate
+```
+
+**Windows (PowerShell):**
+```bash
+venv\Scripts\Activate.ps1
+```
+
+**Note:** If you get an execution policy error in PowerShell, run:
+```bash
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+You should see `(venv)` prefix in your terminal, indicating the environment is active.
+
+4. **Upgrade pip (recommended)**
+
+```bash
+python -m pip install --upgrade pip
+```
+
+5. **Install project dependencies**
+
+**Option A: Using requirements.txt (recommended)**
+```bash
+pip install -r requirements.txt
+```
+
+**Option B: Manual installation**
+```bash
+pip install qiskit qiskit-aer numpy scipy matplotlib
+```
+
+6. **Verify installation**
+
+```bash
+python -c "import qiskit; print(f'Qiskit version: {qiskit.__version__}')"
+```
+
+Expected output:
+```
+Qiskit version: 2.1.2 (or similar)
+```
+
+7. **Run the Simon's Algorithm test suite**
+
+```bash
+python simon_qiskit.py
+```
+
+You should see the complete test suite output with all 6 cases.
+
+8. **Deactivate virtual environment (when done)**
+
+```bash
+deactivate
+```
+
+---
+
+#### Step-by-Step Installation (Linux/macOS)
+
+1. **Navigate to the project directory**
+
+```bash
+cd /path/to/QISKIT
+```
+
+2. **Create virtual environment**
+
+```bash
+python3 -m venv venv
+```
+
+3. **Activate virtual environment**
+
+```bash
+source venv/bin/activate
+```
+
+4. **Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+5. **Run the project**
+
+```bash
+python simon_qiskit.py
+```
+
+6. **Deactivate (when done)**
+
+```bash
+deactivate
+```
+
+---
+
+### Quick Start (Without Virtual Environment)
+
+**Not recommended for production, but works for testing:**
+
+```bash
+# Navigate to directory
+cd C:\Users\DEADSERPENT\Music\QISKIT
+
+# Install dependencies globally
+pip install qiskit qiskit-aer numpy
+
+# Run the project
+python simon_qiskit.py
+```
+
+⚠️ **Warning:** Installing globally may cause package conflicts.
+
+---
 
 ### Dependencies
 
 - `qiskit >= 1.1.0` - IBM's quantum computing framework
-- `qiskit-aer >= 0.17.0` - High-performance simulators
+- `qiskit-aer >= 0.17.0` - High-performance quantum simulators
+- `qiskit-ibm-runtime >= 0.42.0` - IBM Quantum Runtime (for hardware access)
 - `numpy >= 1.16.3` - Numerical computing
+- `scipy >= 1.0` - Scientific computing library
+- `matplotlib >= 3.3.0` - Visualization (optional)
+- `pylatexenc >= 2.0` - Circuit diagram rendering (optional)
+
+---
+
+### Troubleshooting
+
+**Issue: `ModuleNotFoundError: No module named 'qiskit_aer'`**
+- Solution: Make sure virtual environment is activated and run `pip install qiskit-aer`
+
+**Issue: PowerShell execution policy error**
+- Solution: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+**Issue: Permission denied when installing packages**
+- Solution: Use virtual environment OR add `--user` flag: `pip install --user qiskit`
+
+**Issue: Slow installation**
+- Solution: Use a faster mirror or upgrade pip: `python -m pip install --upgrade pip`
 
 ---
 
@@ -296,11 +482,21 @@ Case   n    s        Description                    Expected Result
 ```
 QISKIT/
 │
-├── simon_qiskit.py          # Main implementation file
-├── README.md                # This file
+├── simon_qiskit.py          # Main implementation file (455 lines)
+├── README.md                # Comprehensive documentation
+├── requirements.txt         # Python dependencies
 ├── .gitignore              # Git ignore rules
-└── requirements.txt         # Python dependencies (optional)
+│
+├── setup.bat               # Automated setup for Windows
+├── setup.sh                # Automated setup for Linux/macOS
+│
+└── venv/                   # Virtual environment (created after setup)
+    ├── Scripts/            # (Windows) or bin/ (Linux/macOS)
+    ├── Lib/                # Installed packages
+    └── ...
 ```
+
+**Note:** The `venv/` directory is created automatically when you run the setup scripts and is excluded from version control via `.gitignore`.
 
 ### Code Organization
 
